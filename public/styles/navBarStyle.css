@@ -1,0 +1,63 @@
+.logo {
+    position: fixed;
+    top: 0;
+    right: 0;
+}
+.socials {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+}
+
+.dropdown {
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {
+    background-color: #ddd;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.title {
+    color: white;
+    font-size: xx-large;
+    font-style: oblique;
+    /* background-color: black; */
+}
+
+.bg {
+    background-color: black;
+    background-image: url("../Images/starsbg.png");
+}
+
+.content {
+    font-size: medium;
+    color: wheat;
+}
+
+.parag {
+    font-size: x-large;
+    font-style: initial;
+    color: lavenderblush;
+}
