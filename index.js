@@ -1,10 +1,10 @@
 const express = require("express");
 const app = express();
 
-const NODEJS_PORT = 3000;
+const NODEJS_PORT = process.env.NODEJS_PORT || 3000;
 
 app.listen(NODEJS_PORT, () => {
-    console.log(`listening at https://localhost:${NODEJS_PORT}`);
+	console.log(`listening at https://localhost:${NODEJS_PORT}`);
 });
 
 app.use(express.static("public"));
