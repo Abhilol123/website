@@ -61,3 +61,7 @@
     font-style: initial;
     color: lavenderblush;
 }
+
+.about-container {
+    padding: 60px;
+}
