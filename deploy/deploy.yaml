@@ -1,0 +1,67 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: prod
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: website-service
+  namespace: prod
+spec:
+  selector:
+    app: website
+  type: LoadBalancer
+  ports:
+    - name: website-tcp
+      protocol: TCP
+      port: 80
+      targetPort: website-tcp
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: website
+  namespace: prod
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: website
+  template:
+    metadata:
+      labels:
+        app: website
+    spec:
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 600
+      containers:
+      - name: website-nginx
+        image: abhilol/website
+        imagePullPolicy: IfNotPresent
+        resources:
+          requests:
+            cpu: '0.05'
+            memory: 64M
+          limits:
+            cpu: '0.20'
+            memory: 256M
+        ports:
+        - name: website-tcp
+          containerPort: 80
+        livenessProbe:
+          exec:
+            command: ['ash', '-c', 'nc -z localhost 80']
+          periodSeconds: 10
+          timeoutSeconds: 5
+          failureThreshold: 6
+          successThreshold: 1
+          initialDelaySeconds: 30
+        readinessProbe:
+          exec:
+            command: ['ash', '-c', 'nc -z localhost 80']
+          periodSeconds: 5
+          timeoutSeconds: 2
+          failureThreshold: 4
+          successThreshold: 2
+          initialDelaySeconds: 30
